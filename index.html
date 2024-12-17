@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Calculator for Stem Wall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Stem Wall Concrete Calculator</h1>
+    <label for="height">Enter the height of the stem wall (in inches):</label>
+    <input type="number" id="height" placeholder="Height in inches" />
+
+    <label for="length">Enter the length of the stem wall (in inches):</label>
+    <input type="number" id="length" placeholder="Length in inches" />
+
+    <label for="thickness">Enter the thickness of the stem wall (in inches):</label>
+    <input type="number" id="thickness" placeholder="Thickness in inches" />
+
+    <button onclick="calculateConcrete()">Calculate Concrete Needed</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateConcrete() {
+        // Get the values from the input fields
+        const height = parseFloat(document.getElementById('height').value);
+        const length = parseFloat(document.getElementById('length').value);
+        const thickness = parseFloat(document.getElementById('thickness').value);
+
+        const resultDiv = document.getElementById('result');
+
+        // Validate the input values
+        if (isNaN(height) || isNaN(length) || isNaN(thickness) || height <= 0 || length <= 0 || thickness <= 0) {
+            resultDiv.innerHTML = "Please enter valid positive numbers for height, length, and thickness.";
+            resultDiv.style.color = "red";
+            return;
+        }
+
+        // Calculate the volume in cubic inches
+        const volumeInCubicInches = height * length * thickness;
+
+        // Convert cubic inches to cubic feet (1 cubic foot = 1728 cubic inches)
+        const volumeInCubicFeet = volumeInCubicInches / 1728;
+
+        // Display the result
+        resultDiv.innerHTML = `You will need approximately <strong>${volumeInCubicFeet.toFixed(2)}</strong> cubic feet of concrete.`;
+        resultDiv.style.color = "green";
+    }
+</script>
+
+</body>
+</html>
